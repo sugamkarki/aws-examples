@@ -38,6 +38,7 @@ done
 
 
 aws s3 sync $OUTPUT_DIR s3://$BUCKET_NAME/files
+rm -r $OUTPUT_DIR
 
 # aws s3api list-objects-v2 \
 # --bucket $BUCKET_NAME 

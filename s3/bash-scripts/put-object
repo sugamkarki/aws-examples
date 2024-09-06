@@ -1,33 +1,29 @@
 #! /usr/bin/env bash
-echo "====put-objects==="
+echo "====put-object==="
+if [ -z "$1" ]; then
+    echo "no bucket name given."
+    echo "there needs tpo be a bucket name. EG: ./put-obnject my-bucket-name fprefix"
+    exit 1
+fi
+# check for filename
+if [ -z "$2" ]; then
+    echo "no second param name given."
+    echo "there needs to be a file name. EG: ./put-obnject my-bucket-name filename"
+    exit 1
+fi
+BUCKET_NAME=$1
+FILENAME=$2
 
-OUTPUT_DIR="./tmp/s3-bash-scripts"
+# Extract the filename (without the directory)
+filename=$(basename "$FILENAME")
 
-rm -r $OUTPUT_DIR
-mkdir -p $OUTPUT_DIR
-# Determine how many files to create
-num_files=$((5 + RANDOM % 6))
+# Extract the extension
+extension="${filename##*.}"
 
-# Loop to create the random files
-# Loop to create the random files in the /tmp directory
-for ((i=1; i<=num_files; i++))
-do
-    # Generate a random filename using letters and numbers
-    filename="file_$i".txt
-    
-    # Create the file in /tmp directory
-    touch $OUTPUT_DIR"/$filename"
-    
-    # Optionally, write some random content to the file
-    echo "This is file $i with random content." > "/tmp/$filename.txt"
-done
+# Extract the filename without the extension
+filename_without_extension="${filename%.*}"
 
-# if [ -z "$1" ]; then
-#     echo "no bucket name given."
-#     echo "there needs tpo be a bucket name. EG: ./list-objects my-bucket-name"
-#     exit 1
-# fi
-# BUCKET_NAME=$1
-
-# aws s3api list-objects-v2 \
-# --bucket $BUCKET_NAME 
+aws s3api put-object \
+--bucket $BUCKET_NAME \
+--key $filename \
+--body $FILENAME
