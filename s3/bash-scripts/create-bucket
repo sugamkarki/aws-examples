@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+echo "====create-bucket==="
+if [ -z "$1" ]; then
+    echo "no bucket name given."
+    echo "there needs tpo be a bucket name. EG: ./create-bucket my-bucket-name"
+    exit 1
+fi
+BUCKET_NAME=$1
+
+aws s3api create-bucket \
+--bucket $BUCKET_NAME \
+--region ca-central-1 \
+--create-bucket-configuration \
+LocationConstraint="ca-central-1" \
+--output yaml

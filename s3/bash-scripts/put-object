@@ -1,0 +1,33 @@
+#! /usr/bin/env bash
+echo "====put-objects==="
+
+OUTPUT_DIR="./tmp/s3-bash-scripts"
+
+rm -r $OUTPUT_DIR
+mkdir -p $OUTPUT_DIR
+# Determine how many files to create
+num_files=$((5 + RANDOM % 6))
+
+# Loop to create the random files
+# Loop to create the random files in the /tmp directory
+for ((i=1; i<=num_files; i++))
+do
+    # Generate a random filename using letters and numbers
+    filename="file_$i".txt
+    
+    # Create the file in /tmp directory
+    touch $OUTPUT_DIR"/$filename"
+    
+    # Optionally, write some random content to the file
+    echo "This is file $i with random content." > "/tmp/$filename.txt"
+done
+
+# if [ -z "$1" ]; then
+#     echo "no bucket name given."
+#     echo "there needs tpo be a bucket name. EG: ./list-objects my-bucket-name"
+#     exit 1
+# fi
+# BUCKET_NAME=$1
+
+# aws s3api list-objects-v2 \
+# --bucket $BUCKET_NAME 

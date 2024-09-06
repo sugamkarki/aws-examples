@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+echo "====list-objects==="
+if [ -z "$1" ]; then
+    echo "no bucket name given."
+    echo "there needs tpo be a bucket name. EG: ./list-objects my-bucket-name"
+    exit 1
+fi
+BUCKET_NAME=$1
+
+aws s3api list-objects-v2 \
+--bucket $BUCKET_NAME 

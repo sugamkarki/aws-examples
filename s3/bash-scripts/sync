@@ -1,0 +1,43 @@
+#! /usr/bin/env bash
+echo "====sync-objects==="
+
+if [ -z "$1" ]; then
+    echo "no bucket name given."
+    echo "there needs tpo be a bucket name. EG: ./list-objects my-bucket-name fprefix"
+    exit 1
+fi
+# check for filename
+if [ -z "$2" ]; then
+    echo "no second param name given."
+    echo "there needs to be a file name prefix. EG: ./list-objects my-bucket-name fprefix"
+    exit 1
+fi
+BUCKET_NAME=$1
+FILENAME_PREFIX=$2
+
+OUTPUT_DIR="./tmp/s3-bash-scripts"
+
+rm -r $OUTPUT_DIR
+mkdir -p $OUTPUT_DIR
+# Determine how many files to create
+num_files=$((5 + RANDOM % 6))
+
+# Loop to create the random files
+# Loop to create the random files in the /tmp directory
+for ((i=1; i<=num_files; i++))
+do
+    # Generate a random filename using letters and numbers
+    filename="$FILENAME_PREFIX._.$i".txt
+    
+    # Create the file in /tmp directory
+    touch $OUTPUT_DIR"/$filename"
+    
+    # Optionally, write some random content to the file
+    echo "This is file $i with random content." > "/tmp/$filename.txt"
+done
+
+
+aws s3 sync $OUTPUT_DIR s3://$BUCKET_NAME/files
+
+# aws s3api list-objects-v2 \
+# --bucket $BUCKET_NAME 
