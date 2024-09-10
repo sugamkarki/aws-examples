@@ -1,0 +1,11 @@
+name: aws-s3-sdk
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+description: gonna do a bucket
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: aws-python
