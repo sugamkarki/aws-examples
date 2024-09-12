@@ -1,0 +1,10 @@
+{
+    "AccessKey": {
+        "UserName": "sts-machine-user",
+        "AccessKeyId": "AKIA5XTJOWI53JNQBG2K",
+        "Status": "Active",
+        "SecretAccessKey": "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",
+        "CreateDate": "2024-09-12T16:54:37+00:00"
+    }
+}
+ 
