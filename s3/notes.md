@@ -7,4 +7,6 @@
 - bucket versioning
 - bucket encryption
 - static website hosting
-- 
+  
+
+![alt text](image.png)  
