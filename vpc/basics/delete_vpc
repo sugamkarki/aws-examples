@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-
+# VPC IGW SUBNET RT ASSOCIATION_ID
 if [ -z "$1" ]; then
     echo "no VPC ID given."
     exit 1
@@ -7,13 +7,42 @@ else
     export VPC_ID="$1"
 fi
 
+if [ -z "$2" ]; then
+    echo "no IGW ID given."
+    exit 1
+else
+    export IGW_ID="$2"
+fi
+if [ -z "$3" ]; then
+    echo "no SUBNET ID given."
+    exit 1
+else
+    export SUBNET_ID="$3"
+fi
+if [ -z "$4" ]; then
+    echo "no RT ID given."
+    exit 1
+else
+    export RT_ID="$4"
+fi
+if [ -z "$5" ]; then
+    echo "no ASSOCIATION_ID given."
+    exit 1
+else
+    export ASSOCIATION_ID="$5"
+fi
+
 # Detach the IGW
-
+aws ec2 detach-internet-gateway --internet-gateway-id $IGW_ID --vpc-id $VPC_ID
+# Disassociate route table
+aws ec2 disassociate-route-table --association-id $ASSOCIATION_ID
 # Delete the IGW
-
-# Detach the subnet
-
+aws ec2 delete-internet-gateway --internet-gateway-id $IGW_ID
 # Delete the subnet
+aws ec2 delete-subnet --subnet-id $SUBNET_ID
+#delete route table
+aws ec2 delete-route-table --route-table-id $RT_ID
 
+# Delete vpc
 aws ec2 delete-vpc --vpc-id $VPC_ID
 
