@@ -1,0 +1,23 @@
+ClientToken: c8f40022-fc46-4902-8530-70cd78dca0d3
+NetworkAcl:
+  Associations: []
+  Entries:
+  - CidrBlock: 0.0.0.0/0
+    Egress: true
+    IcmpTypeCode: {}
+    PortRange: {}
+    Protocol: '-1'
+    RuleAction: deny
+    RuleNumber: 32767
+  - CidrBlock: 0.0.0.0/0
+    Egress: false
+    IcmpTypeCode: {}
+    PortRange: {}
+    Protocol: '-1'
+    RuleAction: deny
+    RuleNumber: 32767
+  IsDefault: false
+  NetworkAclId: acl-08a050aee7a7bd9c2
+  OwnerId: '944040227387'
+  Tags: []
+  VpcId: vpc-0ce168d4627b7fe18
